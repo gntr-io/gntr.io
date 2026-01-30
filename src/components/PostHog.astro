@@ -1,0 +1,35 @@
+---
+const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY;
+const posthogHost = import.meta.env.PUBLIC_POSTHOG_HOST || "https://app.posthog.com";
+
+const shouldLoadPostHog = posthogKey && posthogKey !== "";
+---
+
+{
+  shouldLoadPostHog && (
+    <script
+      is:inline
+      define:vars={{ posthogKey, posthogHost }}
+      type="module"
+    >
+      import posthog from 'posthog-js';
+
+      posthog.init(posthogKey, {
+        api_host: posthogHost,
+        loaded: (posthog) => {
+          if (import.meta.env.DEV) {
+            console.log('PostHog loaded in development mode');
+          }
+        },
+        // Automatically capture pageviews
+        capture_pageview: true,
+        // Automatically capture clicks
+        autocapture: true,
+        // Disable in development
+        disable_session_recording: import.meta.env.DEV,
+      });
+
+      window.posthog = posthog;
+    </script>
+  )
+}
