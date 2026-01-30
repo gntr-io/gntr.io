@@ -1,7 +1,419 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+
+const services = [
+  {
+    title: "Website Development",
+    description: "Custom websites built with modern frameworks and best practices.",
+    command: "$ gntr build --type=website",
+  },
+  {
+    title: "E-commerce Solutions",
+    description: "Online stores with payment integration and inventory management.",
+    command: "$ gntr build --type=ecommerce",
+  },
+  {
+    title: "Mobile Applications",
+    description: "iOS and Android apps with native performance.",
+    command: "$ gntr build --type=mobile",
+  },
+  {
+    title: "Custom MCP Servers",
+    description: "Model Context Protocol servers and custom integrations.",
+    command: "$ gntr build --type=mcp",
+  },
+  {
+    title: "AI Integration",
+    description: "AI-powered features and automation for your business.",
+    command: "$ gntr build --type=ai",
+  },
+];
 ---
 
-<MainLayout title="GNTR - Home" description="GNTR - Building exceptional digital solutions">
-	<h1>Welcome to GNTR</h1>
+<MainLayout
+  title="GNTR - Digital Solutions"
+  description="Building exceptional websites, e-commerce pages, mobile apps, custom MCP servers, and AI integration for businesses."
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <span class="terminal-title">gntr@terminal:~</span>
+        </div>
+        <div class="terminal-body">
+          <p class="terminal-line">
+            <span class="prompt">$</span>
+            <span class="command">gntr --help</span>
+          </p>
+          <p class="terminal-output">
+            Building exceptional digital solutions for your business
+          </p>
+          <h1 class="hero-title">
+            Transform Your Ideas Into <span class="highlight">Reality</span>
+          </h1>
+          <p class="hero-description">
+            Custom websites, e-commerce platforms, mobile apps, MCP servers, and
+            AI integration - built with precision and expertise.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Get Started</a>
+            <a href="/portfolio" class="btn btn-secondary">View Work</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="prompt">$</span> Services
+      </h2>
+      <div class="services-grid">
+        {
+          services.map((service) => (
+            <div class="service-card">
+              <div class="card-header">
+                <code class="command-text">{service.command}</code>
+              </div>
+              <h3 class="card-title">{service.title}</h3>
+              <p class="card-description">{service.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="prompt">$</span> Contact
+      </h2>
+      <div class="contact-wrapper">
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="email" class="form-label">
+              <span class="prompt">$</span> Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">
+              <span class="prompt">$</span> Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-input"
+              rows="6"
+              placeholder="Tell us about your project..."
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 </MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .hero {
+    margin-bottom: 4rem;
+
+    @include tablet {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .terminal-window {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background-color: rgba($bg-primary, 0.5);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.2);
+  }
+
+  .terminal-title {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: $text-body;
+  }
+
+  .terminal-body {
+    padding: 2rem 1rem;
+
+    @include tablet {
+      padding: 3rem 2rem;
+    }
+  }
+
+  .terminal-line {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 0.5rem;
+  }
+
+  .prompt {
+    color: $cta-primary;
+    margin-right: 0.5rem;
+    font-weight: 600;
+  }
+
+  .command {
+    color: $cta-hover;
+  }
+
+  .terminal-output {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+
+    @include tablet {
+      font-size: 3rem;
+    }
+
+    .highlight {
+      color: $cta-primary;
+    }
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    color: $text-body;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .services {
+    margin-bottom: 4rem;
+
+    @include tablet {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.25rem;
+    }
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-card {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $cta-primary;
+      transform: translateY(-2px);
+    }
+  }
+
+  .card-header {
+    margin-bottom: 1rem;
+  }
+
+  .command-text {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: $cta-hover;
+    background-color: rgba($bg-code, 0.5);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: $text-heading;
+  }
+
+  .card-description {
+    color: $text-body;
+    line-height: 1.6;
+  }
+
+  .contact {
+    margin-bottom: 4rem;
+
+    @include tablet {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .contact-wrapper {
+    max-width: 600px;
+  }
+
+  .contact-form {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 2rem 1rem;
+    border-radius: 4px;
+
+    @include tablet {
+      padding: 2.5rem 2rem;
+    }
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: $text-heading;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .form-input {
+    width: 100%;
+    background-color: rgba($bg-primary, 0.5);
+    border: 1px solid rgba($cta-primary, 0.2);
+    color: $text-body;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $cta-primary;
+      background-color: rgba($bg-primary, 0.7);
+    }
+
+    &::placeholder {
+      color: rgba($text-body, 0.5);
+    }
+
+    &[type="email"],
+    &[type="text"] {
+      font-family: "Courier New", monospace;
+    }
+  }
+
+  textarea.form-input {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background-color: $cta-primary;
+    color: $bg-primary;
+    border-color: $cta-primary;
+
+    &:hover {
+      background-color: $cta-hover;
+      border-color: $cta-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: $text-heading;
+    border-color: rgba($cta-primary, 0.4);
+
+    &:hover {
+      border-color: $cta-primary;
+      background-color: rgba($cta-primary, 0.1);
+    }
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".contact-form");
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // TODO: Implement form submission
+        console.log("Form submitted");
+        alert("Form submission will be implemented later!");
+      });
+    }
+  });
+</script>
