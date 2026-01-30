@@ -1,0 +1,189 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { name: "Home", path: "/" },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Blog", path: "/blog" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
+];
+---
+
+<nav class="nav">
+  <div class="container nav-container">
+    <a href="/" class="logo">
+      <span class="logo-text">GNTR</span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+
+    <ul class="nav-menu">
+      {
+        navItems.map((item) => (
+          <li>
+            <a
+              href={item.path}
+              class:list={["nav-link", { active: currentPath === item.path }]}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .nav {
+    background-color: $bg-primary;
+    border-bottom: 1px solid rgba($cta-primary, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: $text-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $cta-primary;
+    }
+
+    &-text {
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+
+    @include mobile {
+      display: flex;
+    }
+
+    .hamburger {
+      width: 25px;
+      height: 2px;
+      background-color: $text-heading;
+      position: relative;
+      transition: all 0.3s ease;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        width: 25px;
+        height: 2px;
+        background-color: $text-heading;
+        transition: all 0.3s ease;
+      }
+
+      &::before {
+        top: -8px;
+      }
+
+      &::after {
+        top: 8px;
+      }
+    }
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+
+    @include mobile {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background-color: $bg-card;
+      padding: 2rem 1rem;
+      gap: 1rem;
+      display: none;
+      border-bottom: 1px solid rgba($cta-primary, 0.1);
+
+      &.active {
+        display: flex;
+      }
+    }
+
+    li {
+      margin: 0;
+    }
+  }
+
+  .nav-link {
+    color: $text-body;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: $cta-primary;
+      transition: width 0.3s ease;
+    }
+
+    &:hover,
+    &.active {
+      color: $cta-primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &.active::after {
+      background-color: $cta-hover;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    }
+  });
+</script>
