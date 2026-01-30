@@ -1,0 +1,315 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const projects = [
+  {
+    title: "E-commerce Platform",
+    description:
+      "Full-featured online store with payment processing, inventory management, and admin dashboard.",
+    tech: ["Astro", "TypeScript", "Stripe", "PostgreSQL"],
+    status: "completed",
+    year: "2025",
+  },
+  {
+    title: "AI Chat Integration",
+    description:
+      "Custom AI chatbot integration for customer support with natural language processing.",
+    tech: ["Python", "OpenAI", "FastAPI", "React"],
+    status: "completed",
+    year: "2025",
+  },
+  {
+    title: "Mobile Fitness App",
+    description:
+      "Cross-platform mobile app for workout tracking with real-time stats and social features.",
+    tech: ["React Native", "Firebase", "Node.js"],
+    status: "completed",
+    year: "2024",
+  },
+  {
+    title: "Custom MCP Server",
+    description:
+      "Model Context Protocol server for enterprise document processing and analysis.",
+    tech: ["TypeScript", "MCP SDK", "Claude API"],
+    status: "completed",
+    year: "2025",
+  },
+  {
+    title: "Corporate Website",
+    description:
+      "Modern, responsive website with CMS integration and SEO optimization.",
+    tech: ["Astro", "SCSS", "Netlify CMS"],
+    status: "completed",
+    year: "2024",
+  },
+  {
+    title: "Data Analytics Dashboard",
+    description:
+      "Real-time analytics dashboard with interactive charts and data visualization.",
+    tech: ["React", "D3.js", "PostgreSQL", "Express"],
+    status: "completed",
+    year: "2024",
+  },
+];
+---
+
+<MainLayout
+  title="Portfolio - GNTR"
+  description="Explore our portfolio of websites, mobile apps, MCP servers, and AI integration projects."
+>
+  <section class="portfolio">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">
+          <span class="prompt">$</span> Portfolio
+        </h1>
+        <p class="page-description">
+          A showcase of our recent projects across web, mobile, and AI
+          integration.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        {
+          projects.map((project) => (
+            <article class="project-card">
+              <div class="project-header">
+                <div class="project-meta">
+                  <code class="status-badge status-{project.status}">
+                    {project.status}
+                  </code>
+                  <span class="project-year">{project.year}</span>
+                </div>
+              </div>
+              <h2 class="project-title">
+                <span class="prompt">{'>'}</span> {project.title}
+              </h2>
+              <p class="project-description">{project.description}</p>
+              <div class="tech-stack">
+                <span class="tech-label">Stack:</span>
+                <div class="tech-tags">
+                  {project.tech.map((tech) => (
+                    <span class="tech-tag">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="cta-section">
+        <div class="terminal-box">
+          <p class="terminal-text">
+            <span class="prompt">$</span>
+            <span class="command">gntr create --project=yours</span>
+          </p>
+          <p class="cta-text">Ready to start your project?</p>
+          <a href="/contact" class="btn btn-primary">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .portfolio {
+    margin-bottom: 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+
+    @include tablet {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  .prompt {
+    color: $cta-primary;
+    font-weight: 600;
+  }
+
+  .page-description {
+    font-size: 1.125rem;
+    color: $text-body;
+    max-width: 600px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .project-card {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $cta-primary;
+      transform: translateY(-2px);
+    }
+  }
+
+  .project-header {
+    margin-bottom: 1rem;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .status-badge {
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .status-completed {
+    background-color: rgba($cta-primary, 0.2);
+    color: $cta-primary;
+  }
+
+  .project-year {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: rgba($text-body, 0.7);
+  }
+
+  .project-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: $text-heading;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .project-description {
+    color: $text-body;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tech-label {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: $cta-hover;
+    font-weight: 600;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    background-color: rgba($bg-code, 0.5);
+    color: $text-body;
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid rgba($cta-primary, 0.1);
+  }
+
+  .cta-section {
+    margin-top: 4rem;
+  }
+
+  .terminal-box {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 2rem 1.5rem;
+    border-radius: 4px;
+    text-align: center;
+
+    @include tablet {
+      padding: 3rem 2rem;
+    }
+  }
+
+  .terminal-text {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .command {
+    color: $cta-hover;
+    margin-left: 0.5rem;
+  }
+
+  .cta-text {
+    font-size: 1.25rem;
+    color: $text-heading;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background-color: $cta-primary;
+    color: $bg-primary;
+    border-color: $cta-primary;
+
+    &:hover {
+      background-color: $cta-hover;
+      border-color: $cta-hover;
+      transform: translateY(-1px);
+    }
+  }
+</style>

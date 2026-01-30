@@ -1,0 +1,398 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// This is a template for individual blog posts
+// In a real implementation, this would fetch content from markdown files or a CMS
+
+const { slug } = Astro.params;
+
+// Sample blog post data - in production, fetch from content collection or API
+const blogPosts: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    date: string;
+    readTime: string;
+    category: string;
+    content: string;
+  }
+> = {
+  "introduction-to-mcp-servers": {
+    title: "Introduction to Model Context Protocol Servers",
+    description:
+      "Learn about MCP servers and how they enable seamless AI integration for your applications.",
+    date: "2025-01-28",
+    readTime: "5 min",
+    category: "AI",
+    content: `
+      <h2>What is MCP?</h2>
+      <p>The Model Context Protocol (MCP) is an open standard that enables seamless integration between AI applications and external data sources.</p>
+
+      <h2>Why Use MCP Servers?</h2>
+      <p>MCP servers provide a standardized way to connect AI models with your business data, tools, and workflows.</p>
+
+      <h3>Key Benefits:</h3>
+      <ul>
+        <li>Standardized integration patterns</li>
+        <li>Secure data access</li>
+        <li>Scalable architecture</li>
+        <li>Easy maintenance</li>
+      </ul>
+
+      <h2>Getting Started</h2>
+      <p>Building an MCP server is straightforward with the official SDK and comprehensive documentation.</p>
+
+      <pre><code>// Example MCP server setup
+import { Server } from "@modelcontextprotocol/sdk/server/index.js";
+
+const server = new Server({
+  name: "my-mcp-server",
+  version: "1.0.0",
+});
+
+server.setRequestHandler(ListResourcesRequestSchema, async () => {
+  return { resources: [...] };
+});</code></pre>
+
+      <h2>Conclusion</h2>
+      <p>MCP servers are the future of AI integration, providing a clean and maintainable way to connect your applications with AI capabilities.</p>
+    `,
+  },
+  "building-modern-ecommerce": {
+    title: "Building Modern E-commerce Platforms",
+    description:
+      "Best practices for creating scalable, secure, and user-friendly online stores.",
+    date: "2025-01-20",
+    readTime: "8 min",
+    category: "Web Dev",
+    content: `
+      <h2>The Modern E-commerce Landscape</h2>
+      <p>E-commerce has evolved significantly, with users expecting fast, secure, and seamless shopping experiences across all devices.</p>
+
+      <h2>Essential Features</h2>
+      <ul>
+        <li>Fast page load times</li>
+        <li>Mobile-responsive design</li>
+        <li>Secure payment processing</li>
+        <li>Inventory management</li>
+        <li>Order tracking</li>
+      </ul>
+
+      <h2>Technology Stack</h2>
+      <p>Choosing the right technology stack is crucial for long-term success and scalability.</p>
+
+      <h3>Recommended Stack:</h3>
+      <ul>
+        <li>Frontend: Astro, React, or Next.js</li>
+        <li>Backend: Node.js, Python, or Go</li>
+        <li>Database: PostgreSQL or MongoDB</li>
+        <li>Payments: Stripe or Square</li>
+      </ul>
+
+      <h2>Security Considerations</h2>
+      <p>Security should be a top priority when handling customer data and payment information.</p>
+    `,
+  },
+  "mobile-app-development-2025": {
+    title: "Mobile App Development in 2025",
+    description:
+      "Trends and technologies shaping the future of mobile application development.",
+    date: "2025-01-15",
+    readTime: "6 min",
+    category: "Mobile",
+    content: `
+      <h2>The State of Mobile Development</h2>
+      <p>Mobile development continues to evolve with new frameworks, tools, and best practices emerging regularly.</p>
+
+      <h2>Cross-Platform vs Native</h2>
+      <p>The debate continues, but cross-platform frameworks have matured significantly.</p>
+
+      <h3>Popular Options:</h3>
+      <ul>
+        <li>React Native - JavaScript/TypeScript</li>
+        <li>Flutter - Dart</li>
+        <li>Native - Swift/Kotlin</li>
+      </ul>
+
+      <h2>Key Trends for 2025</h2>
+      <ul>
+        <li>AI-powered features</li>
+        <li>Enhanced security and privacy</li>
+        <li>5G optimization</li>
+        <li>AR/VR integration</li>
+      </ul>
+
+      <h2>Best Practices</h2>
+      <p>Follow platform guidelines, optimize performance, and prioritize user experience above all else.</p>
+    `,
+  },
+};
+
+const post = blogPosts[slug || ""];
+
+if (!post) {
+  return Astro.redirect("/blog");
+}
+
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<MainLayout
+  title={`${post.title} - GNTR Blog`}
+  description={post.description}
+  type="article"
+>
+  <article class="blog-post">
+    <div class="container">
+      <div class="post-header">
+        <a href="/blog" class="back-link">
+          <span>←</span> Back to Blog
+        </a>
+        <div class="post-meta">
+          <code class="category-tag">{post.category}</code>
+          <span class="post-date">{formatDate(post.date)}</span>
+          <span class="read-time">{post.readTime} read</span>
+        </div>
+        <h1 class="post-title">
+          <span class="prompt">$</span> {post.title}
+        </h1>
+        <p class="post-description">{post.description}</p>
+      </div>
+
+      <div class="post-content">
+        <div class="content-wrapper" set:html={post.content} />
+      </div>
+
+      <div class="post-footer">
+        <div class="terminal-box">
+          <p class="terminal-text">
+            <span class="prompt">$</span>
+            <span class="command">gntr blog --read-more</span>
+          </p>
+          <a href="/blog" class="btn btn-secondary">Read More Articles</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</MainLayout>
+
+<style lang="scss">
+  @use "../../styles/variables" as *;
+  @use "../../styles/mixins" as *;
+
+  .blog-post {
+    margin-bottom: 4rem;
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.2);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $text-body;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $cta-primary;
+    }
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .category-tag {
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    background-color: rgba($cta-primary, 0.2);
+    color: $cta-primary;
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .post-date,
+  .read-time {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: rgba($text-body, 0.7);
+  }
+
+  .post-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  .prompt {
+    color: $cta-primary;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .post-description {
+    font-size: 1.125rem;
+    color: $text-body;
+    line-height: 1.6;
+  }
+
+  .post-content {
+    margin-bottom: 3rem;
+  }
+
+  .content-wrapper {
+    max-width: 720px;
+
+    :global(h2) {
+      color: $text-heading;
+      font-size: 1.75rem;
+      margin: 2rem 0 1rem;
+      padding-top: 1rem;
+    }
+
+    :global(h3) {
+      color: $text-heading;
+      font-size: 1.375rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    :global(p) {
+      color: $text-body;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+    }
+
+    :global(ul),
+    :global(ol) {
+      color: $text-body;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+
+      :global(li) {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    :global(pre) {
+      background-color: $bg-code;
+      border: 1px solid rgba($cta-primary, 0.2);
+      border-radius: 4px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+
+      :global(code) {
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        color: $text-body;
+        line-height: 1.6;
+      }
+    }
+
+    :global(code) {
+      font-family: "Courier New", monospace;
+      font-size: 0.9em;
+      background-color: rgba($bg-code, 0.5);
+      padding: 0.2em 0.4em;
+      border-radius: 2px;
+      color: $cta-hover;
+    }
+
+    :global(pre code) {
+      background-color: transparent;
+      padding: 0;
+    }
+
+    :global(a) {
+      color: $cta-primary;
+      text-decoration: underline;
+
+      &:hover {
+        color: $cta-hover;
+      }
+    }
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+  }
+
+  .terminal-box {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 2rem 1.5rem;
+    border-radius: 4px;
+    text-align: center;
+
+    @include tablet {
+      padding: 3rem 2rem;
+    }
+  }
+
+  .terminal-text {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .command {
+    color: $cta-hover;
+    margin-left: 0.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: $text-heading;
+    border-color: rgba($cta-primary, 0.4);
+
+    &:hover {
+      border-color: $cta-primary;
+      background-color: rgba($cta-primary, 0.1);
+    }
+  }
+</style>
