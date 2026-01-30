@@ -13,7 +13,7 @@ const navItems = [
 <nav class="nav">
   <div class="container nav-container">
     <a href="/" class="logo">
-      <span class="logo-text">GNTR</span>
+      <img src="/logo.png" alt="GNTR Logo" class="logo-image" />
     </a>
 
     <button class="nav-toggle" aria-label="Toggle navigation">
@@ -62,16 +62,26 @@ const navItems = [
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: $text-heading;
-    font-size: 1.5rem;
-    font-weight: 700;
-    transition: color 0.3s ease;
+    transition: opacity 0.3s ease;
 
     &:hover {
-      color: $cta-primary;
+      opacity: 0.85;
+    }
+
+    &-image {
+      height: 40px;
+      width: auto;
+      display: block;
+
+      @include tablet {
+        height: 45px;
+      }
     }
 
     &-text {
+      color: $text-heading;
+      font-size: 1.5rem;
+      font-weight: 700;
       letter-spacing: 0.05em;
     }
   }

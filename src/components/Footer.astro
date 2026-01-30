@@ -6,7 +6,9 @@ const currentYear = new Date().getFullYear();
   <div class="container">
     <div class="footer-content">
       <div class="footer-section">
-        <h3 class="footer-title">GNTR</h3>
+        <div class="footer-brand">
+          <img src="/logo.png" alt="GNTR Logo" class="footer-logo" />
+        </div>
         <p class="footer-description">
           Building exceptional websites, e-commerce pages, mobile apps, custom
           MCP servers, and AI integration for businesses.
@@ -81,6 +83,16 @@ const currentYear = new Date().getFullYear();
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .footer-brand {
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo {
+    height: 50px;
+    width: auto;
+    display: block;
   }
 
   .footer-title {
