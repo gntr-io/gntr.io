@@ -129,7 +129,13 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => {
 
 // Export getStaticPaths to tell Astro which routes to pre-generate
 export async function getStaticPaths() {
-  return Object.keys(blogPosts).map((slug) => ({
+  const slugs = [
+    "introduction-to-mcp-servers",
+    "building-modern-ecommerce",
+    "mobile-app-development-2025",
+  ];
+
+  return slugs.map((slug) => ({
     params: { slug },
   }));
 }
