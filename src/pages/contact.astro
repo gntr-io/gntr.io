@@ -1,0 +1,517 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const services = [
+  "Website Development",
+  "E-commerce Solutions",
+  "Mobile Applications",
+  "Custom MCP Servers",
+  "AI Integration",
+  "Other",
+];
+---
+
+<MainLayout
+  title="Contact - GNTR"
+  description="Get in touch with GNTR to discuss your project and how we can help bring your ideas to life."
+>
+  <section class="contact-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">
+          <span class="prompt">$</span> Contact
+        </h1>
+        <p class="page-description">
+          Let's discuss your project and how we can help bring your ideas to
+          life.
+        </p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-form-wrapper">
+          <form class="contact-form" id="contactPageForm">
+            <input
+              type="hidden"
+              name="access_key"
+              value={import.meta.env.PUBLIC_WEB3FORMS_KEY || ""}
+            />
+            <input type="hidden" name="subject" value="New Contact from GNTR Website - Contact Page" />
+            <input type="hidden" name="from_name" value="GNTR Website" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" class="form-label">
+                  <span class="prompt">$</span> Name <span class="optional"
+                    >(optional)</span
+                  >
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-input"
+                  placeholder="John Doe"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">
+                  <span class="prompt">$</span> Email <span class="required"
+                    >*</span
+                  >
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-input"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone" class="form-label">
+                  <span class="prompt">$</span> Phone <span class="optional"
+                    >(optional)</span
+                  >
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-input"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="company" class="form-label">
+                  <span class="prompt">$</span> Company <span class="optional"
+                    >(optional)</span
+                  >
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  class="form-input"
+                  placeholder="Your Company"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service" class="form-label">
+                <span class="prompt">$</span> Service Interest <span
+                  class="optional">(optional)</span
+                >
+              </label>
+              <select id="service" name="service" class="form-select">
+                <option value="">Select a service...</option>
+                {services.map((service) => <option value={service}>{service}</option>)}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">
+                <span class="prompt">$</span> Message <span class="required"
+                  >*</span
+                >
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-input"
+                rows="8"
+                placeholder="Tell us about your project, goals, and timeline..."
+                required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Send Message
+            </button>
+            <p class="form-status" id="contactFormStatus"></p>
+          </form>
+        </div>
+
+        <div class="contact-info">
+          <div class="info-card">
+            <h2 class="info-title">
+              <span class="prompt">></span> Get In Touch
+            </h2>
+            <p class="info-text">
+              We're here to answer your questions and discuss how we can help
+              with your project.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-heading">Response Time</h3>
+            <p class="info-text">
+              We typically respond within 24 hours during business days.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3 class="info-heading">What Happens Next?</h3>
+            <ul class="info-list">
+              <li>We'll review your message</li>
+              <li>Schedule an initial consultation</li>
+              <li>Discuss your requirements</li>
+              <li>Provide a project proposal</li>
+            </ul>
+          </div>
+
+          <div class="terminal-box">
+            <p class="terminal-line">
+              <span class="prompt">$</span>
+              <span class="command">gntr status --availability</span>
+            </p>
+            <p class="terminal-output">Currently accepting new projects</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .contact-page {
+    margin-bottom: 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+
+    @include tablet {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  .prompt {
+    color: $cta-primary;
+    font-weight: 600;
+  }
+
+  .page-description {
+    font-size: 1.125rem;
+    color: $text-body;
+    max-width: 600px;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+
+    @include desktop {
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .contact-form-wrapper {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 2rem 1rem;
+    border-radius: 4px;
+
+    @include tablet {
+      padding: 2.5rem 2rem;
+    }
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: $text-heading;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .required {
+    color: $cta-primary;
+  }
+
+  .optional {
+    font-size: 0.85rem;
+    color: rgba($text-body, 0.6);
+    font-weight: 400;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    background-color: rgba($bg-primary, 0.5);
+    border: 1px solid rgba($cta-primary, 0.2);
+    color: $text-body;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $cta-primary;
+      background-color: rgba($bg-primary, 0.7);
+    }
+
+    &::placeholder {
+      color: rgba($text-body, 0.5);
+    }
+  }
+
+  .form-input[type="email"],
+  .form-input[type="text"],
+  .form-input[type="tel"] {
+    font-family: "Courier New", monospace;
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300FF88' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+
+    option {
+      background-color: $bg-card;
+      color: $text-body;
+    }
+  }
+
+  textarea.form-input {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background-color: $cta-primary;
+    color: $bg-primary;
+    border-color: $cta-primary;
+
+    &:hover {
+      background-color: $cta-hover;
+      border-color: $cta-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-card {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+  }
+
+  .info-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info-heading {
+    font-size: 1.125rem;
+    color: $text-heading;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-text {
+    color: $text-body;
+    line-height: 1.6;
+  }
+
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      color: $text-body;
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+
+      &::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: $cta-primary;
+      }
+    }
+  }
+
+  .terminal-box {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+  }
+
+  .terminal-line {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .command {
+    color: $cta-hover;
+    margin-left: 0.5rem;
+  }
+
+  .terminal-output {
+    font-family: "Courier New", monospace;
+    color: $cta-primary;
+    font-size: 0.95rem;
+  }
+
+  .form-status {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+    min-height: 1rem;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactPageForm") as HTMLFormElement;
+    const status = document.getElementById("contactFormStatus");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!status) return;
+
+        const formData = new FormData(form);
+        const accessKey = formData.get("access_key") as string;
+
+        // Check if Web3Forms key is configured
+        if (!accessKey || accessKey === "") {
+          status.innerHTML = "⚠️ Form not configured. Please add WEB3FORMS_KEY to environment variables.";
+          status.style.color = "#ff4444";
+          return;
+        }
+
+        // Update button
+        const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const originalText = button.textContent;
+        button.textContent = "Sending...";
+        button.disabled = true;
+
+        try {
+          const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            status.innerHTML = "✓ Message sent successfully! We'll get back to you soon.";
+            status.style.color = "#00FF88";
+            form.reset();
+
+            // Track with PostHog if available
+            if (window.posthog) {
+              window.posthog.capture("contact_form_submitted", {
+                form: "contact_page",
+                name: formData.get("name"),
+                company: formData.get("company"),
+                service: formData.get("service"),
+              });
+            }
+          } else {
+            throw new Error(data.message || "Form submission failed");
+          }
+        } catch (error) {
+          status.innerHTML = "❌ Something went wrong. Please try again.";
+          status.style.color = "#ff4444";
+          console.error("Form error:", error);
+        } finally {
+          button.textContent = originalText;
+          button.disabled = false;
+        }
+      });
+    }
+  });
+</script>

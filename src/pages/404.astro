@@ -1,0 +1,235 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout
+  title="404 - Page Not Found | GNTR"
+  description="The page you're looking for doesn't exist."
+>
+  <section class="error-page">
+    <div class="container">
+      <div class="error-content">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <span class="terminal-title">gntr@terminal:~</span>
+          </div>
+          <div class="terminal-body">
+            <p class="terminal-line">
+              <span class="prompt">$</span>
+              <span class="command">cd {Astro.url.pathname}</span>
+            </p>
+            <p class="error-message">
+              bash: cd: {Astro.url.pathname}: No such file or directory
+            </p>
+
+            <h1 class="error-title">404 - Page Not Found</h1>
+            <p class="error-description">
+              The page you're looking for doesn't exist or has been moved.
+            </p>
+
+            <div class="error-actions">
+              <a href="/" class="btn btn-primary">Go Home</a>
+              <a href="/contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+
+            <div class="helpful-links">
+              <p class="links-title">
+                <span class="prompt">$</span> Helpful Links:
+              </p>
+              <ul class="links-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .error-page {
+    margin-bottom: 4rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+
+    @include tablet {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .error-content {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .terminal-window {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background-color: rgba($bg-primary, 0.5);
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.2);
+  }
+
+  .terminal-title {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: $text-body;
+  }
+
+  .terminal-body {
+    padding: 2rem 1rem;
+
+    @include tablet {
+      padding: 3rem 2rem;
+    }
+  }
+
+  .terminal-line {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 0.5rem;
+  }
+
+  .prompt {
+    color: $cta-primary;
+    margin-right: 0.5rem;
+    font-weight: 600;
+  }
+
+  .command {
+    color: $cta-hover;
+  }
+
+  .error-message {
+    font-family: "Courier New", monospace;
+    color: #ff4444;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .error-title {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: $text-heading;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  .error-description {
+    font-size: 1.125rem;
+    color: $text-body;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background-color: $cta-primary;
+    color: $bg-primary;
+    border-color: $cta-primary;
+
+    &:hover {
+      background-color: $cta-hover;
+      border-color: $cta-hover;
+      transform: translateY(-1px);
+    }
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: $text-heading;
+    border-color: rgba($cta-primary, 0.4);
+
+    &:hover {
+      border-color: $cta-primary;
+      background-color: rgba($cta-primary, 0.1);
+    }
+  }
+
+  .helpful-links {
+    border-top: 1px solid rgba($cta-primary, 0.2);
+    padding-top: 2rem;
+  }
+
+  .links-title {
+    font-family: "Courier New", monospace;
+    color: $text-heading;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    li {
+      margin: 0;
+    }
+
+    a {
+      color: $text-body;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &::before {
+        content: "→";
+        color: $cta-primary;
+      }
+
+      &:hover {
+        color: $cta-primary;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background -->
+  <rect width="128" height="128" fill="#1A1F1E" rx="16"/>
+
+  <!-- Terminal window border -->
+  <rect x="12" y="12" width="104" height="104" fill="none" stroke="#00FF88" stroke-width="2.5" rx="6"/>
+
+  <!-- Terminal dots -->
+  <circle cx="24" cy="24" r="3" fill="#00FF88"/>
+  <circle cx="36" cy="24" r="3" fill="#C8FF00"/>
+  <circle cx="48" cy="24" r="3" fill="#E8F5F0"/>
+
+  <!-- Main "G" letter -->
+  <text x="64" y="88" font-family="monospace, 'Courier New'" font-size="56" font-weight="bold" fill="#00FF88" text-anchor="middle">G</text>
+
+  <!-- Cursor underscore -->
+  <rect x="80" y="78" width="16" height="4" fill="#C8FF00"/>
+</svg>

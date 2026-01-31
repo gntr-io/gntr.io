@@ -1,0 +1,366 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+const values = [
+  {
+    title: "Quality First",
+    description:
+      "We build solutions that stand the test of time with clean code and best practices.",
+  },
+  {
+    title: "Client Focused",
+    description:
+      "Your success is our success. We work closely with you throughout the entire process.",
+  },
+  {
+    title: "Innovation",
+    description:
+      "We stay ahead of the curve with the latest technologies and methodologies.",
+  },
+  {
+    title: "Transparency",
+    description:
+      "Clear communication and honest timelines. No surprises, just results.",
+  },
+];
+---
+
+<MainLayout
+  title="About - GNTR"
+  description="Learn about GNTR and our mission to build exceptional digital solutions for businesses."
+>
+  <section class="about">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">
+          <span class="prompt">$</span> About GNTR
+        </h1>
+      </div>
+
+      <div class="about-content">
+        <div class="intro-section">
+          <div class="terminal-box">
+            <p class="terminal-line">
+              <span class="prompt">$</span>
+              <span class="command">gntr --version</span>
+            </p>
+            <p class="terminal-output">v1.0.0 - Building digital excellence</p>
+          </div>
+
+          <div class="intro-text">
+            <h2 class="section-heading">Who We Are</h2>
+            <p>
+              GNTR is a digital solutions company specializing in web
+              development, e-commerce platforms, mobile applications, custom MCP
+              servers, and AI integration for businesses.
+            </p>
+            <p>
+              We believe in building software that not only works but excels.
+              Every project is crafted with attention to detail, modern best
+              practices, and a focus on user experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="values-section">
+          <h2 class="section-heading">
+            <span class="prompt">{'>'}</span> Our Values
+          </h2>
+          <div class="values-grid">
+            {
+              values.map((value) => (
+                <div class="value-card">
+                  <h3 class="value-title">{value.title}</h3>
+                  <p class="value-description">{value.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="services-detail">
+          <h2 class="section-heading">
+            <span class="prompt">{'>'}</span> What We Do
+          </h2>
+          <div class="services-list">
+            <div class="service-item">
+              <code class="service-command">$ gntr build --type=website</code>
+              <h3 class="service-name">Website Development</h3>
+              <p class="service-desc">
+                Custom websites built with modern frameworks like Astro, React,
+                and Next.js. Responsive, fast, and SEO-optimized.
+              </p>
+            </div>
+
+            <div class="service-item">
+              <code class="service-command">$ gntr build --type=ecommerce</code
+              >
+              <h3 class="service-name">E-commerce Solutions</h3>
+              <p class="service-desc">
+                Full-featured online stores with payment processing, inventory
+                management, and analytics integration.
+              </p>
+            </div>
+
+            <div class="service-item">
+              <code class="service-command">$ gntr build --type=mobile</code>
+              <h3 class="service-name">Mobile Applications</h3>
+              <p class="service-desc">
+                Cross-platform and native mobile apps for iOS and Android with
+                smooth performance and intuitive UX.
+              </p>
+            </div>
+
+            <div class="service-item">
+              <code class="service-command">$ gntr build --type=mcp</code>
+              <h3 class="service-name">Custom MCP Servers</h3>
+              <p class="service-desc">
+                Model Context Protocol servers for seamless AI integration with
+                your existing systems and workflows.
+              </p>
+            </div>
+
+            <div class="service-item">
+              <code class="service-command">$ gntr build --type=ai</code>
+              <h3 class="service-name">AI Integration</h3>
+              <p class="service-desc">
+                Integrate AI-powered features into your applications with
+                custom models, chatbots, and automation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <div class="terminal-box">
+            <p class="terminal-line">
+              <span class="prompt">$</span>
+              <span class="command">gntr connect</span>
+            </p>
+            <p class="cta-text">Ready to work together?</p>
+            <a href="/contact" class="btn btn-primary">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .about {
+    margin-bottom: 4rem;
+  }
+
+  .page-header {
+    margin-bottom: 3rem;
+
+    @include tablet {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .page-title {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  .prompt {
+    color: $cta-primary;
+    font-weight: 600;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .intro-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include tablet {
+      gap: 3rem;
+    }
+  }
+
+  .terminal-box {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+  }
+
+  .terminal-line {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    margin-bottom: 0.5rem;
+  }
+
+  .command {
+    color: $cta-hover;
+    margin-left: 0.5rem;
+  }
+
+  .terminal-output {
+    font-family: "Courier New", monospace;
+    color: $text-body;
+    opacity: 0.8;
+  }
+
+  .intro-text {
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      color: $text-body;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      max-width: 720px;
+    }
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2rem;
+    }
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .value-card {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $cta-primary;
+      transform: translateY(-2px);
+    }
+  }
+
+  .value-title {
+    font-size: 1.25rem;
+    color: $text-heading;
+    margin-bottom: 0.75rem;
+  }
+
+  .value-description {
+    color: $text-body;
+    line-height: 1.6;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .service-item {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: $cta-primary;
+    }
+  }
+
+  .service-command {
+    font-family: "Courier New", monospace;
+    font-size: 0.875rem;
+    color: $cta-hover;
+    background-color: rgba($bg-code, 0.5);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .service-name {
+    font-size: 1.375rem;
+    color: $text-heading;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    color: $text-body;
+    line-height: 1.6;
+  }
+
+  .cta-section {
+    text-align: center;
+
+    .terminal-box {
+      padding: 2rem 1.5rem;
+
+      @include tablet {
+        padding: 3rem 2rem;
+      }
+    }
+  }
+
+  .cta-text {
+    font-size: 1.25rem;
+    color: $text-heading;
+    margin: 1rem 0 1.5rem;
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    background-color: $cta-primary;
+    color: $bg-primary;
+    border-color: $cta-primary;
+
+    &:hover {
+      background-color: $cta-hover;
+      border-color: $cta-hover;
+      transform: translateY(-1px);
+    }
+  }
+</style>
