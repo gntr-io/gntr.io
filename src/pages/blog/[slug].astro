@@ -4,8 +4,6 @@ import MainLayout from "../../layouts/MainLayout.astro";
 // This is a template for individual blog posts
 // In a real implementation, this would fetch content from markdown files or a CMS
 
-const { slug } = Astro.params;
-
 // Sample blog post data - in production, fetch from content collection or API
 const blogPosts: Record<
   string,
@@ -128,6 +126,15 @@ server.setRequestHandler(ListResourcesRequestSchema, async () => {
     `,
   },
 };
+
+// Export getStaticPaths to tell Astro which routes to pre-generate
+export async function getStaticPaths() {
+  return Object.keys(blogPosts).map((slug) => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
 
 const post = blogPosts[slug || ""];
 
