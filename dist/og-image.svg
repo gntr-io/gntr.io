@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#1A1F1E"/>
+  <rect x="50" y="50" width="1100" height="530" fill="none" stroke="#00FF88" stroke-width="3" rx="8"/>
+  
+  <!-- Terminal dots -->
+  <circle cx="80" cy="80" r="8" fill="#00FF88"/>
+  <circle cx="110" cy="80" r="8" fill="#C8FF00"/>
+  <circle cx="140" cy="80" r="8" fill="#E8F5F0"/>
+  
+  <!-- Terminal prompt -->
+  <text x="80" y="180" font-family="monospace" font-size="32" fill="#00FF88" font-weight="bold">$ gntr --info</text>
+  
+  <!-- Main title -->
+  <text x="80" y="280" font-family="system-ui" font-size="72" fill="#FFFFFF" font-weight="bold">GNTR</text>
+  
+  <!-- Subtitle -->
+  <text x="80" y="340" font-family="system-ui" font-size="32" fill="#E8F5F0">Building Digital Excellence</text>
+  
+  <!-- Services -->
+  <text x="80" y="420" font-family="monospace" font-size="24" fill="#C8FF00">Web • E-commerce • Mobile • MCP • AI</text>
+  
+  <!-- Bottom line -->
+  <text x="80" y="520" font-family="monospace" font-size="20" fill="#00FF88">gntr.io</text>
+</svg>
