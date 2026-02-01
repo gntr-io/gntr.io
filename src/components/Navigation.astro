@@ -16,6 +16,10 @@ const navItems = [
       <img src="/logo.png" alt="GNTR Logo" class="logo-image" />
     </a>
 
+    <div class="env-info">
+      <code>Dev Mode: {import.meta.env.DEV ? 'true' : 'false'}</code>
+    </div>
+
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span class="hamburger"></span>
     </button>
@@ -34,6 +38,9 @@ const navItems = [
         ))
       }
     </ul>
+
+    <!-- Hidden admin access trigger -->
+    <a href="/login" class="admin-trigger" aria-label="Admin access" title="Admin"></a>
   </div>
 </nav>
 
@@ -56,6 +63,20 @@ const navItems = [
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+
+      .env-info {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    code {
+      background: rgba($bg-code, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: $cta-hover;
+    }
+  }
   }
 
   .logo {
@@ -183,16 +204,75 @@ const navItems = [
       background-color: $cta-hover;
     }
   }
+
+  // Hidden admin trigger
+  .admin-trigger {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: rgba($cta-primary, 0.15);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    opacity: 0.3;
+
+    @include tablet {
+      right: 2rem;
+    }
+
+    @include mobile {
+      display: none; // Hide on mobile to avoid accidental clicks
+    }
+
+    &:hover {
+      background: rgba($cta-primary, 0.5);
+      box-shadow: 0 0 12px rgba($cta-primary, 0.6);
+      opacity: 1;
+      transform: translateY(-50%) scale(1.3);
+    }
+
+    &:active {
+      box-shadow: 0 0 20px rgba($cta-primary, 0.8);
+    }
+  }
 </style>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const navToggle = document.querySelector(".nav-toggle");
     const navMenu = document.querySelector(".nav-menu");
+    const adminTrigger = document.querySelector(".admin-trigger");
 
     if (navToggle && navMenu) {
       navToggle.addEventListener("click", () => {
         navMenu.classList.toggle("active");
+      });
+    }
+
+    // Track admin trigger discovery
+    if (adminTrigger) {
+      adminTrigger.addEventListener("click", () => {
+        if (window.posthog) {
+          window.posthog.capture("admin_trigger_clicked", {
+            location: "navigation",
+            trigger_type: "hidden_dot",
+          });
+        }
+      });
+
+      // Track if user discovers it by hovering
+      let hasHovered = false;
+      adminTrigger.addEventListener("mouseenter", () => {
+        if (!hasHovered && window.posthog) {
+          window.posthog.capture("admin_trigger_discovered", {
+            location: "navigation",
+            discovery_method: "hover",
+          });
+          hasHovered = true;
+        }
       });
     }
   });
