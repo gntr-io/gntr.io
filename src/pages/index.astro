@@ -57,8 +57,8 @@ const services = [
             AI integration - built with precision and expertise.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Get Started</a>
-            <a href="/portfolio" class="btn btn-secondary">View Work</a>
+            <a href="#contact" class="btn btn-primary" id="hero-get-started">Get Started</a>
+            <a href="/portfolio" class="btn btn-secondary" id="hero-view-work">View Work</a>
           </div>
         </div>
       </div>
@@ -428,6 +428,32 @@ const services = [
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Track hero button clicks
+    const getStartedBtn = document.getElementById("hero-get-started");
+    const viewWorkBtn = document.getElementById("hero-view-work");
+
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener("click", () => {
+        if (window.posthog) {
+          window.posthog.capture("hero_get_started_clicked", {
+            location: "hero_section",
+            button_text: "Get Started",
+          });
+        }
+      });
+    }
+
+    if (viewWorkBtn) {
+      viewWorkBtn.addEventListener("click", () => {
+        if (window.posthog) {
+          window.posthog.capture("hero_view_work_clicked", {
+            location: "hero_section",
+            button_text: "View Work",
+          });
+        }
+      });
+    }
+
     const form = document.getElementById("homeContactForm") as HTMLFormElement;
     const status = document.getElementById("homeFormStatus");
 
