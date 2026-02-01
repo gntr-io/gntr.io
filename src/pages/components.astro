@@ -1,0 +1,875 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Card from "../components/Card.astro";
+
+// Only allow access in development
+if (!import.meta.env.DEV) {
+  return Astro.redirect('/404');
+}
+
+const componentSections = [
+  {
+    title: "Card Variants",
+    description: "All card component variants with different props and content"
+  },
+  {
+    title: "Typography",
+    description: "Heading styles, body text, and code blocks"
+  },
+  {
+    title: "Colors & Effects",
+    description: "Color palette, gradients, and neon effects"
+  }
+];
+---
+
+<MainLayout title="Components - Dev Only" description="Component library for visual testing">
+  <section class="components-page">
+    <div class="container">
+      <!-- Dev Warning Badge -->
+      <div class="dev-badge">
+        <span class="badge-icon">⚠️</span>
+        <span class="badge-text">DEV ONLY</span>
+      </div>
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">
+          <span class="prompt">›</span> Component Library
+        </h1>
+        <p class="page-description">
+          Visual testing environment for all components, variants, and design elements.
+        </p>
+
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="toc">
+        <h2 class="toc-title">Jump to Section</h2>
+        <ul class="toc-list">
+          {componentSections.map((section, index) => (
+            <li>
+              <a href={`#section-${index}`}>{section.title}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Card Variants Section -->
+      <section id="section-0" class="component-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="prompt">›</span> Card Variants
+          </h2>
+          <p class="section-description">
+            Three specialized card variants: Primary (static), Project (clickable modal), Article (clickable link with hover)
+          </p>
+        </div>
+
+        <!-- Primary Card -->
+        <div class="variant-group">
+          <div class="variant-header">
+            <h3 class="variant-title">Primary Card</h3>
+            <code class="variant-code">variant="primary" (or omit)</code>
+          </div>
+          <p class="variant-description">
+            <strong>Props:</strong> title, description, header, minimal (optional)<br>
+            <strong>Behavior:</strong> Static display card for services/features
+          </p>
+          <div class="card-grid-2">
+            <Card
+              title="Website Development"
+              description="Custom websites built with modern frameworks and best practices."
+              header="$ gntr build --type=website"
+            />
+            <Card
+              title="Website Development"
+              description="Custom websites built with modern frameworks and best practices."
+              header="$ gntr build --type=website"
+              minimal={true}
+            />
+          </div>
+        </div>
+
+        <!-- Project Card -->
+        <div class="variant-group">
+          <div class="variant-header">
+            <h3 class="variant-title">Project Card</h3>
+            <code class="variant-code">variant="project"</code>
+          </div>
+          <p class="variant-description">
+            <strong>Props:</strong> status (enum), date, title, description, stack (array), minimal (optional)<br>
+            <strong>Behavior:</strong> Clickable card that opens a modal with project details
+          </p>
+
+          <!-- Project 1 -->
+          <div class="card-grid-2">
+            <Card
+              variant="project"
+              status="completed"
+              date="2025-01-28"
+              title="E-commerce Platform"
+              description="Full-featured online store with payment processing, inventory management, and admin dashboard."
+              stack={["Astro", "TypeScript", "Stripe", "PostgreSQL"]}
+            />
+            <Card
+              variant="project"
+              status="completed"
+              date="2025-01-28"
+              title="E-commerce Platform"
+              description="Full-featured online store with payment processing, inventory management, and admin dashboard."
+              stack={["Astro", "TypeScript", "Stripe", "PostgreSQL"]}
+              minimal={true}
+            />
+          </div>
+
+          <!-- Project 2 -->
+          <div class="card-grid-2 second-pair">
+            <Card
+              variant="project"
+              status="in-progress"
+              date="2025-02-01"
+              title="AI Chat Integration"
+              description="Custom AI chatbot integration for customer support with natural language processing."
+              stack={["Python", "OpenAI", "FastAPI", "React"]}
+            />
+            <Card
+              variant="project"
+              status="in-progress"
+              date="2025-02-01"
+              title="AI Chat Integration"
+              description="Custom AI chatbot integration for customer support with natural language processing."
+              stack={["Python", "OpenAI", "FastAPI", "React"]}
+              minimal={true}
+            />
+          </div>
+        </div>
+
+        <!-- Article Card -->
+        <div class="variant-group">
+          <div class="variant-header">
+            <h3 class="variant-title">Article Card</h3>
+            <code class="variant-code">variant="article"</code>
+          </div>
+          <p class="variant-description">
+            <strong>Props:</strong> tags (array), date, readTime, title, description, link (optional), minimal (optional)<br>
+            <strong>Behavior:</strong> Clickable link card, read time appears on hover
+          </p>
+
+          <!-- Article 1 -->
+          <div class="card-grid-2">
+            <Card
+              variant="article"
+              tags={["AI", "Tutorial"]}
+              date="2025-01-28"
+              readTime="5 min"
+              title="Introduction to MCP Servers"
+              description="Learn about MCP servers and how they enable seamless AI integration for your applications."
+              link="/blog/introduction-to-mcp-servers"
+            />
+            <Card
+              variant="article"
+              tags={["AI", "Tutorial"]}
+              date="2025-01-28"
+              readTime="5 min"
+              title="Introduction to MCP Servers"
+              description="Learn about MCP servers and how they enable seamless AI integration for your applications."
+              link="/blog/introduction-to-mcp-servers"
+              minimal={true}
+            />
+          </div>
+
+          <!-- Article 2 -->
+          <div class="card-grid-2 second-pair">
+            <Card
+              variant="article"
+              tags={["Web Dev", "E-commerce"]}
+              date="2025-01-20"
+              readTime="8 min"
+              title="Building Modern E-commerce Platforms"
+              description="Best practices for creating scalable, secure, and user-friendly online stores."
+              link="/blog/building-modern-ecommerce"
+            />
+            <Card
+              variant="article"
+              tags={["Web Dev", "E-commerce"]}
+              date="2025-01-20"
+              readTime="8 min"
+              title="Building Modern E-commerce Platforms"
+              description="Best practices for creating scalable, secure, and user-friendly online stores."
+              link="/blog/building-modern-ecommerce"
+              minimal={true}
+            />
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Typography Section -->
+      <section id="section-1" class="component-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="prompt">›</span> Typography
+          </h2>
+          <p class="section-description">
+            Heading styles, body text, and code examples
+          </p>
+        </div>
+
+        <div class="variant-group">
+          <div class="typography-showcase">
+            <h1>Heading 1 - Main Page Title</h1>
+            <h2>Heading 2 - Section Title</h2>
+            <h3>Heading 3 - Subsection Title</h3>
+            <h4>Heading 4 - Card Title</h4>
+
+            <p class="body-large" style="font-size: 1.125rem; margin-top: 2rem;">
+              Large body text - Used for introductions and important paragraphs.
+            </p>
+
+            <p>
+              Regular body text - The standard paragraph font size and line height
+              used throughout the site. Optimized for readability with proper
+              line spacing and letter spacing.
+            </p>
+
+            <p style="font-size: 0.875rem; color: rgba(232, 245, 240, 0.7);">
+              Small text - Used for metadata, captions, and secondary information.
+            </p>
+
+            <div style="margin-top: 2rem;">
+              <code style="background: rgba(0,255,136,0.1); padding: 0.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">
+                Inline code example
+              </code>
+            </div>
+
+            <pre style="margin-top: 1rem; padding: 1.5rem; background: #0a3d2c; border: 1px solid rgba(0,255,136,0.2); border-radius: 4px; overflow-x: auto;">
+              <code style="font-family: 'JetBrains Mono', monospace; color: #e8f5f0;">
+// Code block example
+const greeting = "Hello, GNTR!";
+console.log(greeting);
+              </code>
+            </pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colors & Effects Section -->
+      <section id="section-2" class="component-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="prompt">›</span> Colors & Effects
+          </h2>
+          <p class="section-description">
+            Color palette, gradients, and neon glow effects
+          </p>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="variant-group">
+          <h3 class="variant-title">Color Palette</h3>
+          <div class="color-grid">
+            <div class="color-swatch">
+              <div class="swatch" style="background: #1a1f1e;"></div>
+              <code>$carbon</code>
+              <span>#1a1f1e</span>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background: #2d3936;"></div>
+              <code>$slate</code>
+              <span>#2d3936</span>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background: #00ff88;"></div>
+              <code>$neon-green</code>
+              <span>#00ff88</span>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background: #c8ff00;"></div>
+              <code>$lime</code>
+              <span>#c8ff00</span>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background: #ff6b35;"></div>
+              <code>$neon-orange</code>
+              <span>#ff6b35</span>
+            </div>
+            <div class="color-swatch">
+              <div class="swatch" style="background: #ff8c42;"></div>
+              <code>$bright-orange</code>
+              <span>#ff8c42</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gradient Examples -->
+        <div class="variant-group">
+          <h3 class="variant-title">Gradient Effects</h3>
+          <div class="gradient-showcase">
+            <div class="gradient-box gradient-text">
+              <h2>Gradient Text Effect</h2>
+              <p>Green to Orange gradient</p>
+            </div>
+            <div class="gradient-box" style="background: linear-gradient(135deg, #00ff88 0%, #ff6b35 100%); padding: 2rem; border-radius: 4px;">
+              <h3 style="color: #1a1f1e; margin: 0;">Background Gradient</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Neon Glow Effects -->
+        <div class="variant-group">
+          <h3 class="variant-title">Neon Glow Effects</h3>
+          <div class="glow-showcase">
+            <button class="glow-button" style="background: #ff6b35; color: #1a1f1e; padding: 1rem 2rem; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);">
+              Button with Glow
+            </button>
+            <div class="glow-text" style="font-size: 2rem; font-weight: 600; color: #00ff88; text-shadow: 0 0 20px #00ff88;">
+              Glowing Text
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Component Usage Guide -->
+      <section class="component-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <span class="prompt">›</span> Usage Examples
+          </h2>
+        </div>
+
+        <div class="variant-group">
+          <div class="code-example">
+            <h3 class="variant-title">Card Component Usage</h3>
+            <pre style="padding: 1.5rem; background: #0a3d2c; border: 1px solid rgba(0,255,136,0.2); border-radius: 4px; overflow-x: auto;">
+              <code style="font-family: 'JetBrains Mono', monospace; color: #e8f5f0; font-size: 0.9rem;">
+{`---
+import Card from "../components/Card.astro";
+---
+
+<!-- Primary Card (variant optional, defaults to primary) -->
+<Card
+  title="Website Development"
+  description="Custom websites built with modern frameworks."
+  header="$ gntr build --type=website"
+/>
+
+<!-- Primary Card - Minimal -->
+<Card
+  title="Consulting Services"
+  description="Expert guidance."
+  header="$ gntr consult"
+  minimal={true}
+/>
+
+<!-- Project Card (clickable, opens modal) -->
+<Card
+  variant="project"
+  status="completed"
+  date="2025-01-28"
+  title="E-commerce Platform"
+  description="Full-featured online store."
+  stack={["Astro", "TypeScript", "Stripe"]}
+/>
+
+<!-- Article Card (clickable link, hover shows read time) -->
+<Card
+  variant="article"
+  tags={["AI", "Tutorial"]}
+  date="2025-01-28"
+  readTime="5 min"
+  title="Introduction to MCP Servers"
+  description="Learn about MCP servers."
+  link="/blog/mcp-intro"
+/>
+
+<!-- TypeScript Props -->
+interface PrimaryCardProps {
+  variant?: 'primary';    // optional, defaults to primary
+  title: string;
+  description: string;
+  header: string;         // command text
+  minimal?: boolean;      // transparent bg, less padding
+}
+
+interface ProjectCardProps {
+  variant: 'project';
+  status: 'completed' | 'in-progress' | 'planned';
+  date: string;           // ISO date string
+  title: string;
+  description: string;
+  stack: string[];        // array of tech names
+  minimal?: boolean;
+}
+
+interface ArticleCardProps {
+  variant: 'article';
+  tags: string[];         // array of category tags
+  date: string;           // ISO date string
+  readTime: string;       // e.g., "5 min"
+  title: string;
+  description: string;
+  link?: string;          // optional article link
+  minimal?: boolean;
+}`}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</MainLayout>
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "../styles/mixins" as *;
+
+  .components-page {
+    padding: 1.5rem 0 3rem;
+
+    @include tablet {
+      padding: 2rem 0 4rem;
+    }
+  }
+
+  .dev-badge {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 140, 66, 0.2));
+    border: 2px solid $neon-orange;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 0 20px rgba($neon-orange, 0.3);
+    flex-wrap: wrap;
+    width: fit-content;
+    display: flex;
+
+    @include tablet {
+      padding: 1rem 1.5rem;
+      gap: 1rem;
+      flex-wrap: nowrap;
+    }
+
+    .badge-icon {
+      font-size: 1.25rem;
+
+      @include tablet {
+        font-size: 1.5rem;
+      }
+    }
+
+    .badge-text {
+      font-weight: 700;
+      color: $neon-orange;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.95rem;
+
+      @include tablet {
+        font-size: 1.1rem;
+      }
+    }
+
+    .badge-desc {
+      color: rgba($text-body, 0.8);
+      font-size: 0.85rem;
+      width: 100%;
+
+      @include tablet {
+        font-size: 0.9rem;
+        margin-left: auto;
+        width: auto;
+      }
+    }
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    @include tablet {
+      margin-bottom: 3rem;
+    }
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+
+    @include desktop {
+      font-size: 3rem;
+    }
+  }
+
+  .prompt {
+    color: $cta-primary;
+    font-weight: 600;
+  }
+
+  .page-description {
+    font-size: 1rem;
+    color: $text-body;
+    margin-bottom: 1rem;
+
+    @include tablet {
+      font-size: 1.125rem;
+    }
+  }
+
+  .toc {
+    background: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.25rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    width: fit-content;
+
+    @include tablet {
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .toc-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: $text-heading;
+
+    @include tablet {
+      font-size: 1.25rem;
+    }
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    a {
+      color: $text-body;
+      transition: color 0.3s ease;
+      padding: 0.5rem;
+      border-radius: 2px;
+
+      &:hover {
+        color: $cta-primary;
+        background: rgba($cta-primary, 0.1);
+      }
+    }
+  }
+
+  .component-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.1);
+
+    @include tablet {
+      margin-bottom: 3rem;
+      padding-bottom: 2.5rem;
+    }
+
+    @include desktop {
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+
+    @include tablet {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include tablet {
+      font-size: 1.75rem;
+    }
+
+    @include desktop {
+      font-size: 2rem;
+    }
+  }
+
+  .section-description {
+    color: rgba($text-body, 0.8);
+    font-size: 1rem;
+  }
+
+  .variant-group {
+    margin-bottom: 2rem;
+
+    @include tablet {
+      margin-bottom: 2.5rem;
+    }
+
+    @include desktop {
+      margin-bottom: 3rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .variant-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.1);
+
+    @include tablet {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+    }
+  }
+
+  .variant-title {
+    font-size: 1.25rem;
+    color: $text-heading;
+    margin-bottom: 0.5rem;
+
+    @include tablet {
+      font-size: 1.5rem;
+    }
+  }
+
+  .variant-code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    background: rgba($bg-code, 0.5);
+    color: $cta-hover;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba($cta-primary, 0.2);
+    display: inline-block;
+    margin-top: 0.25rem;
+
+    @include tablet {
+      font-size: 0.9rem;
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
+  .variant-description {
+    color: rgba($text-body, 0.8);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+
+    @include tablet {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    strong {
+      color: $cta-primary;
+      font-weight: 600;
+    }
+  }
+
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    &.second-pair {
+      margin-top: 1rem;
+
+      @include tablet {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .typography-showcase {
+    background: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.25rem;
+    border-radius: 4px;
+
+    @include tablet {
+      padding: 1.5rem;
+    }
+
+    @include desktop {
+      padding: 2rem;
+    }
+
+    h1, h2, h3, h4 {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    @include tablet {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    @include desktop {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+
+  .color-swatch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .swatch {
+      height: 60px;
+      border-radius: 4px;
+      border: 1px solid rgba($text-body, 0.2);
+
+      @include tablet {
+        height: 80px;
+      }
+    }
+
+    code {
+      font-size: 0.8rem;
+      color: $cta-primary;
+
+      @include tablet {
+        font-size: 0.85rem;
+      }
+    }
+
+    span {
+      font-size: 0.75rem;
+      color: rgba($text-body, 0.7);
+      font-family: "JetBrains Mono", monospace;
+
+      @include tablet {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .gradient-showcase {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .gradient-box {
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba($cta-primary, 0.2);
+
+    @include tablet {
+      padding: 2rem;
+    }
+
+    h2, h3 {
+      margin: 0;
+      font-size: 1.5rem;
+
+      @include tablet {
+        font-size: inherit;
+      }
+    }
+
+    p {
+      margin: 0.5rem 0 0;
+      opacity: 0.8;
+      font-size: 0.9rem;
+
+      @include tablet {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .gradient-text {
+    background: $bg-card;
+
+    h2 {
+      background: linear-gradient(135deg, $neon-green 0%, $neon-orange 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .glow-showcase {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: $bg-card;
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba($cta-primary, 0.2);
+
+    @include tablet {
+      gap: 2rem;
+      padding: 2rem;
+      justify-content: flex-start;
+    }
+  }
+
+  .code-example {
+    pre {
+      margin-top: 1rem;
+    }
+  }
+</style>
