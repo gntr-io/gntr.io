@@ -2,8 +2,10 @@ $carbon: #1a1f1e;
 $slate: #2d3936;
 $mist: #e8f5f0;
 $white: #ffffff;
-$gntr-green: #00ff88;
+$neon-green: #00ff88;
 $lime: #c8ff00;
+$neon-orange: #ff6b35;
+$bright-orange: #ff8c42;
 $deep-green: #0a3d2c;
 
 $bg-primary: $carbon;
@@ -13,8 +15,8 @@ $bg-code: $deep-green;
 $text-body: $mist;
 $text-heading: $white;
 
-$cta-primary: $gntr-green;
-$cta-hover: $lime;
+$cta-primary: $neon-orange;
+$cta-hover: $neon-green;
 $cta-accent: $lime;
 
 $breakpoint-tablet: 768px;
