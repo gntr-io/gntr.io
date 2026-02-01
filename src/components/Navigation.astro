@@ -16,9 +16,10 @@ const navItems = [
       <img src="/logo.png" alt="GNTR Logo" class="logo-image" />
     </a>
 
-    <div class="env-info">
+    {import.meta.env.DEV && <div class="env-info">
       <code>Dev Mode: {import.meta.env.DEV ? 'true' : 'false'}</code>
-    </div>
+      <a href="/login" class="admin-trigger" aria-label="Admin access" title="Admin"></a>
+    </div>}
 
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span class="hamburger"></span>
@@ -39,8 +40,6 @@ const navItems = [
       }
     </ul>
 
-    <!-- Hidden admin access trigger -->
-    <a href="/login" class="admin-trigger" aria-label="Admin access" title="Admin"></a>
   </div>
 </nav>
 
@@ -68,6 +67,7 @@ const navItems = [
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    align-items: center;
 
     code {
       background: rgba($bg-code, 0.5);
@@ -204,34 +204,20 @@ const navItems = [
       background-color: $cta-hover;
     }
   }
-
-  // Hidden admin trigger
   .admin-trigger {
-    position: absolute;
-    top: 50%;
-    right: 1rem;
-    transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    background: rgba($cta-primary, 0.15);
+    background: rgba($cta-primary, 0.3);
     border-radius: 50%;
     transition: all 0.3s ease;
     cursor: pointer;
-    opacity: 0.3;
-
-    @include tablet {
-      right: 2rem;
-    }
-
-    @include mobile {
-      display: none; // Hide on mobile to avoid accidental clicks
-    }
+    opacity: 0.5;
 
     &:hover {
       background: rgba($cta-primary, 0.5);
       box-shadow: 0 0 12px rgba($cta-primary, 0.6);
       opacity: 1;
-      transform: translateY(-50%) scale(1.3);
+      transform: scale(1.3);
     }
 
     &:active {
