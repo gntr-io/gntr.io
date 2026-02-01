@@ -19,7 +19,23 @@ const shouldLoadPostHog = posthogKey && posthogKey !== "" && posthogHost && post
         capture_pageview: true,
         autocapture: true,
         disable_session_recording: false,
+        capture_performance: true, // Track Web Vitals (LCP, FID, CLS, etc.)
     })
+
+    // Track custom performance metrics
+    if (typeof window !== 'undefined' && 'performance' in window) {
+      window.addEventListener('load', () => {
+        // Get Navigation Timing
+        const perfData = performance.getEntriesByType('navigation')[0];
+        if (perfData) {
+          posthog.capture('page_performance', {
+            page_load_time: perfData.loadEventEnd - perfData.fetchStart,
+            dom_interactive: perfData.domInteractive - perfData.fetchStart,
+            dom_complete: perfData.domComplete - perfData.fetchStart,
+          });
+        }
+      });
+    }
     </script>
   )
 }
