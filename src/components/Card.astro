@@ -1,0 +1,575 @@
+---
+// Variant 1: Primary Card (default)
+interface PrimaryCardProps {
+  variant?: 'primary';
+  title: string;
+  description: string;
+  header: string;
+  minimal?: boolean;
+  class?: string;
+}
+
+// Variant 2: Project Card (clickable, opens modal)
+interface ProjectCardProps {
+  variant: 'project';
+  status: 'completed' | 'in-progress' | 'planned';
+  date: string;
+  title: string;
+  description: string;
+  stack: string[];
+  minimal?: boolean;
+  class?: string;
+}
+
+// Variant 3: Article Card (clickable, read time on hover)
+interface ArticleCardProps {
+  variant: 'article';
+  tags: string[];
+  date: string;
+  readTime: string;
+  title: string;
+  description: string;
+  link?: string;
+  minimal?: boolean;
+  class?: string;
+}
+
+type Props = PrimaryCardProps | ProjectCardProps | ArticleCardProps;
+
+const props = Astro.props;
+const variant = props.variant || 'primary';
+const minimal = props.minimal || false;
+const className = props.class || '';
+
+// Generate unique ID for modals
+const cardId = `card-${Math.random().toString(36).substr(2, 9)}`;
+
+// Helper function to format date
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+---
+
+{variant === 'primary' && (
+  <div class:list={['card', 'card-primary', { 'card-minimal': minimal }, className]}>
+    <div class="card-header">
+      <code class="command-text">{(props as PrimaryCardProps).header}</code>
+    </div>
+    <h3 class="card-title">{props.title}</h3>
+    <p class="card-description">{props.description}</p>
+  </div>
+)}
+
+{variant === 'project' && (
+  <>
+    <button
+      type="button"
+      class:list={['card', 'card-project', 'card-clickable', { 'card-minimal': minimal }, className]}
+      data-modal-target={cardId}
+    >
+      <div class="project-meta">
+        <code class:list={['status-badge', `status-${(props as ProjectCardProps).status}`]}>
+          {(props as ProjectCardProps).status}
+        </code>
+        <span class="project-date">{formatDate((props as ProjectCardProps).date)}</span>
+      </div>
+      <h3 class="card-title">
+        <span class="prompt">›</span> {props.title}
+      </h3>
+      <p class="card-description">{props.description}</p>
+      <div class="tech-stack">
+        <span class="tech-label">Stack:</span>
+        <div class="tech-tags">
+          {(props as ProjectCardProps).stack.map((tech) => (
+            <span class="tech-tag">{tech}</span>
+          ))}
+        </div>
+      </div>
+    </button>
+
+    <!-- Project Modal -->
+    <div id={cardId} class="modal" data-modal>
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">
+            <span class="prompt">›</span> {props.title}
+          </h2>
+          <button type="button" class="modal-close" data-modal-close aria-label="Close">
+            ✕
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="project-meta">
+            <code class:list={['status-badge', `status-${(props as ProjectCardProps).status}`]}>
+              {(props as ProjectCardProps).status}
+            </code>
+            <span class="project-date">{formatDate((props as ProjectCardProps).date)}</span>
+          </div>
+          <p class="modal-description">{props.description}</p>
+          <div class="tech-stack">
+            <span class="tech-label">Tech Stack:</span>
+            <div class="tech-tags">
+              {(props as ProjectCardProps).stack.map((tech) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+)}
+
+{variant === 'article' && (
+  <a
+    href={(props as ArticleCardProps).link || '#'}
+    class:list={['card', 'card-article', 'card-clickable', { 'card-minimal': minimal }, className]}
+  >
+    <div class="article-meta">
+      <div class="article-tags">
+        {(props as ArticleCardProps).tags.map((tag) => (
+          <code class="category-tag">{tag}</code>
+        ))}
+      </div>
+      <div class="article-info">
+        <span class="article-date">{formatDate((props as ArticleCardProps).date)}</span>
+        <span class="read-time">{(props as ArticleCardProps).readTime} read</span>
+      </div>
+    </div>
+    <h3 class="card-title">
+      <span class="prompt">›</span> {props.title}
+    </h3>
+    <p class="card-description">{props.description}</p>
+  </a>
+)}
+
+<style lang="scss">
+  @use "../styles/variables" as *;
+
+  .card {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      border-color: $cta-primary;
+      transform: translateY(-2px);
+      background-color: rgba($bg-card, 0.5);
+
+    }
+  }
+
+  /* Clickable card (button/link behavior) */
+  .card-clickable {
+    cursor: pointer;
+    width: 100%;
+
+    // Button reset for project cards
+    &[type="button"] {
+      font: inherit;
+      background: none;
+      border: none;
+      outline: none;
+      appearance: none;
+      background-color: $bg-card;
+      border: 1px solid rgba($cta-primary, 0.2);
+    }
+
+    &:hover {
+      border-color: $cta-primary;
+      transform: translateY(-2px);
+      background-color: rgba($bg-card, 0.5);
+    }
+
+    &.card-minimal[type="button"] {
+      background-color: transparent;
+    }
+  }
+
+  /* Minimal modifier - applies to all variants */
+  .card-minimal {
+    background-color: transparent;
+    border-color: rgba($cta-primary, 0.1);
+    padding: 1rem;
+
+    &:hover {
+      background-color: rgba($bg-card, 0.5);
+      border-color: $cta-primary;
+    }
+  }
+
+  /* Primary Card (Variant 1) */
+  .card-primary {
+    .card-header {
+      margin-bottom: 0.5rem;
+    }
+
+    .command-text {
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.875rem;
+      color: $cta-hover;
+      background-color: rgba($bg-code, 0.5);
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: $text-heading;
+    }
+
+    .card-description {
+      color: $text-body;
+      line-height: 1.6;
+    }
+  }
+
+  /* Project Card (Variant 2) */
+  .card-project {
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .status-badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .status-completed {
+      background-color: rgba($cta-primary, 0.2);
+      color: $cta-primary;
+    }
+
+    .status-in-progress {
+      background-color: rgba($cta-hover, 0.2);
+      color: $cta-hover;
+    }
+
+    .status-planned {
+      background-color: rgba($text-body, 0.2);
+      color: $text-body;
+    }
+
+    .project-date {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.875rem;
+      color: rgba($text-body, 0.7);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: $text-heading;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .prompt {
+      color: $cta-primary;
+      font-weight: 600;
+    }
+
+    .card-description {
+      color: $text-body;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .tech-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.875rem;
+      color: $cta-hover;
+      font-weight: 600;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tech-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      background-color: rgba($bg-code, 0.5);
+      color: $text-body;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      border: 1px solid rgba($cta-primary, 0.1);
+    }
+  }
+
+  /* Article Card (Variant 3) */
+  .card-article {
+    .article-meta {
+      margin-bottom: 0.75rem;
+    }
+
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .category-tag {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      background-color: rgba($cta-primary, 0.2);
+      color: $cta-primary;
+      padding: 0.25rem 0.5rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .article-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .article-date {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.875rem;
+      color: rgba($text-body, 0.7);
+    }
+
+    .read-time {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.875rem;
+      color: rgba($text-body, 0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    &:hover .read-time {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      color: $text-heading;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .prompt {
+      color: $cta-primary;
+      font-weight: 600;
+    }
+
+    .card-description {
+      color: $text-body;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+
+    &.active {
+      display: flex;
+    }
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($bg-primary, 0.95);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+
+  .modal-content {
+    position: relative;
+    background: $bg-card;
+    border: 1px solid $cta-primary;
+    border-radius: 4px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 40px rgba($cta-primary, 0.4);
+    animation: modalSlideIn 0.3s ease;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba($cta-primary, 0.2);
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $text-heading;
+    flex: 1;
+    padding-right: 1rem;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: $text-body;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.3s ease;
+    line-height: 1;
+
+    &:hover {
+      color: $cta-primary;
+      transform: scale(1.1);
+    }
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-description {
+      color: $text-body;
+      line-height: 1.7;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .tech-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1rem;
+      color: $cta-hover;
+      font-weight: 600;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Modal functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Handle modal triggers
+    document.querySelectorAll('[data-modal-target]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const modalId = trigger.getAttribute('data-modal-target');
+        const modal = document.getElementById(modalId as string);
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+
+          // Track modal open with PostHog
+          if (window.posthog) {
+            const title = trigger.querySelector('.card-title')?.textContent?.trim();
+            window.posthog.capture('project_modal_opened', {
+              project_title: title,
+            });
+          }
+        }
+      });
+    });
+
+    // Handle modal close
+    document.querySelectorAll('[data-modal-close]').forEach((closeBtn) => {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const modal = closeBtn.closest('.modal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal.active').forEach((modal) => {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+  });
+</script>
