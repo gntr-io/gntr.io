@@ -1,8 +1,14 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
+interface PostHogInstance {
+  capture: (event: string, properties?: Record<string, unknown>) => void;
+  identify: (distinctId: string, properties?: Record<string, unknown>) => void;
+  reset: () => void;
+}
+
 interface Window {
-  posthog?: any;
+  posthog?: PostHogInstance;
 }
 
 interface ImportMetaEnv {

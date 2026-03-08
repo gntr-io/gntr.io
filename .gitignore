@@ -35,4 +35,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# astro build output
+/dist/
+/.astro/
+
+.docs/
 .vscode/
