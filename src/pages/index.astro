@@ -3,36 +3,41 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 const services = [
   {
-    title: "Website Development",
-    description: "Custom websites built with modern frameworks and best practices.",
+    title: "Internal AI Tools",
+    description: "We build AI that handles the repeatable parts of your team's work, so your people focus on what actually needs a human.",
+    command: "$ gntr build --type=internal-tool",
+  },
+  {
+    title: "Data & Insight Systems",
+    description: "We connect your scattered data, keep it fresh, and layer in AI that tells you what it means — without a data analyst on payroll.",
+    command: "$ gntr build --type=data-pipeline",
+  },
+  {
+    title: "Productised Expertise",
+    description: "You've built a methodology clients pay for. We encode it into a system you can sell, license, or use as a differentiator.",
+    command: "$ gntr build --type=saas-product",
+  },
+  {
+    title: "AI-Integrated Websites",
+    description: "Custom websites with AI built in — not bolted on. Intelligent forms, dynamic content, and automation from day one.",
     command: "$ gntr build --type=website",
   },
   {
-    title: "E-commerce Solutions",
-    description: "Online stores with payment integration and inventory management.",
-    command: "$ gntr build --type=ecommerce",
-  },
-  {
     title: "Mobile Applications",
-    description: "iOS and Android apps with native performance.",
+    description: "iOS and Android apps with AI integrations baked into the experience, built for performance and scale.",
     command: "$ gntr build --type=mobile",
   },
   {
-    title: "Custom MCP Servers",
-    description: "Model Context Protocol servers and custom integrations.",
-    command: "$ gntr build --type=mcp",
-  },
-  {
-    title: "AI Integration",
-    description: "AI-powered features and automation for your business.",
-    command: "$ gntr build --type=ai",
+    title: "Discovery & Consulting",
+    description: "Not ready to build? We spend 2–4 weeks inside your business, then give you a concrete plan — no obligation to build with us.",
+    command: "$ gntr build --type=discovery",
   },
 ];
 ---
 
 <MainLayout
-  title="GNTR - Digital Solutions"
-  description="Building exceptional websites, e-commerce pages, mobile apps, custom MCP servers, and AI integration for businesses."
+  title="GNTR - Custom AI Development"
+  description="gntr is a custom AI development agency. We build systems that encode your expertise, connect your data, and automate what your team shouldn't have to do manually."
 >
   <!-- Hero Section -->
   <section class="hero">
@@ -44,21 +49,20 @@ const services = [
         <div class="terminal-body">
           <p class="terminal-line">
             <span class="prompt">›</span>
-            <span class="command">gntr --help</span>
+            <span class="command">gntr build --type=ai-system</span>
           </p>
           <p class="terminal-output">
-            Building exceptional digital solutions for your business
+            Your expertise. Engineered.
           </p>
           <h1 class="hero-title">
-            Transform Your Ideas Into <span class="highlight">Reality</span>
+            Your expertise. <span class="highlight">Engineered.</span>
           </h1>
           <p class="hero-description">
-            Custom websites, e-commerce platforms, mobile apps, MCP servers, and
-            AI integration - built with precision and expertise.
+            We build custom AI systems that encode what you know and scale what you do — for your team, or as a product you can sell.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary" id="hero-get-started">Get Started</a>
-            <a href="/portfolio" class="btn btn-secondary" id="hero-view-work">View Work</a>
+            <a href="/contact" class="btn btn-primary" id="hero-get-started">Start with a conversation</a>
+            <a href="/portfolio" class="btn btn-secondary" id="hero-view-work">See our work</a>
           </div>
         </div>
       </div>
