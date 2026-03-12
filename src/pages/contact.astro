@@ -2,18 +2,19 @@
 import MainLayout from "../layouts/MainLayout.astro";
 
 const services = [
-  "Website Development",
-  "E-commerce Solutions",
+  "Internal AI Tools",
+  "Data & Insight Systems",
+  "Productised Expertise",
+  "AI-Integrated Websites",
   "Mobile Applications",
-  "Custom MCP Servers",
-  "AI Integration",
+  "Discovery & Consulting",
   "Other",
 ];
 ---
 
 <MainLayout
-  title="Contact - GNTR"
-  description="Get in touch with GNTR to discuss your project and how we can help bring your ideas to life."
+  title="Contact - gntr"
+  description="Get in touch with gntr to discuss your project and how we can build it together."
 >
   <section class="contact-page">
     <div class="container">
@@ -22,8 +23,7 @@ const services = [
           <span class="prompt">›</span> Contact
         </h1>
         <p class="page-description">
-          Let's discuss your project and how we can help bring your ideas to
-          life.
+          Tell us what you're working on. We'll respond within one business day.
         </p>
       </div>
 
@@ -35,8 +35,8 @@ const services = [
               name="access_key"
               value={import.meta.env.PUBLIC_WEB3FORMS_KEY || ""}
             />
-            <input type="hidden" name="subject" value="New Contact from GNTR Website - Contact Page" />
-            <input type="hidden" name="from_name" value="GNTR Website" />
+            <input type="hidden" name="subject" value="New Contact from gntr Website - Contact Page" />
+            <input type="hidden" name="from_name" value="gntr Website" />
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
 
             <div class="form-row">

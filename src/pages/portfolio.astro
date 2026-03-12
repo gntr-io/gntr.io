@@ -3,59 +3,35 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 const projects = [
   {
-    title: "E-commerce Platform",
+    title: "Advertising Intelligence Platform",
     description:
-      "Full-featured online store with payment processing, inventory management, and admin dashboard.",
-    tech: ["Astro", "TypeScript", "Stripe", "PostgreSQL"],
-    status: "completed",
+      "A SaaS product that connects to live ad account data, applies expert media-buyer analysis frameworks, and surfaces specific recommendations — not generic advice. Built with multi-client data isolation from day one.",
+    tech: ["Python", "Claude API", "MCP", "PostgreSQL", "GCP"],
+    status: "live",
     year: "2025",
   },
   {
-    title: "AI Chat Integration",
+    title: "Automated Performance Data Pipeline",
     description:
-      "Custom AI chatbot integration for customer support with natural language processing.",
-    tech: ["Python", "OpenAI", "FastAPI", "React"],
-    status: "completed",
+      "A data pipeline that pulls advertising performance data from third-party APIs every 12 hours, reconciles attribution lag across tiered lookback windows, and feeds a structured warehouse of 20+ tables for AI-driven analysis.",
+    tech: ["Python", "Google Ads API", "Cloud Run", "PostgreSQL"],
+    status: "live",
     year: "2025",
   },
   {
-    title: "Mobile Fitness App",
+    title: "Expertise Encoding System",
     description:
-      "Cross-platform mobile app for workout tracking with real-time stats and social features.",
-    tech: ["React Native", "Firebase", "Node.js"],
-    status: "completed",
-    year: "2024",
-  },
-  {
-    title: "Custom MCP Server",
-    description:
-      "Model Context Protocol server for enterprise document processing and analysis.",
-    tech: ["TypeScript", "MCP SDK", "Claude API"],
-    status: "completed",
+      "An AI layer that encodes a specialist's decision-making framework into structured prompts — so the system reasons like an expert, not a generalist. Applied across three funnel stages with specific, actionable outputs.",
+    tech: ["Claude API", "MCP", "TypeScript", "FastAPI"],
+    status: "live",
     year: "2025",
-  },
-  {
-    title: "Corporate Website",
-    description:
-      "Modern, responsive website with CMS integration and SEO optimization.",
-    tech: ["Astro", "SCSS", "Netlify CMS"],
-    status: "completed",
-    year: "2024",
-  },
-  {
-    title: "Data Analytics Dashboard",
-    description:
-      "Real-time analytics dashboard with interactive charts and data visualization.",
-    tech: ["React", "D3.js", "PostgreSQL", "Express"],
-    status: "completed",
-    year: "2024",
   },
 ];
 ---
 
 <MainLayout
-  title="Portfolio - GNTR"
-  description="Explore our portfolio of websites, mobile apps, MCP servers, and AI integration projects."
+  title="Portfolio - gntr"
+  description="Real projects built by gntr — AI systems, data pipelines, and productised expertise for businesses that have outgrown generic software."
 >
   <section class="portfolio">
     <div class="container">
@@ -64,8 +40,7 @@ const projects = [
           <span class="prompt">›</span> Portfolio
         </h1>
         <p class="page-description">
-          A showcase of our recent projects across web, mobile, and AI
-          integration.
+          Real projects. Real businesses. AI systems, data pipelines, and productised expertise built for companies that have outgrown generic software.
         </p>
       </div>
 
@@ -196,7 +171,8 @@ const projects = [
     letter-spacing: 0.05em;
   }
 
-  .status-completed {
+  .status-completed,
+  .status-live {
     background-color: rgba($cta-primary, 0.2);
     color: $cta-primary;
   }
