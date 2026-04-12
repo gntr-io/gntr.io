@@ -247,3 +247,22 @@ label {
 .neon-glow {
   text-shadow: 0 0 20px currentColor;
 }
+
+// Client intake form — responsive
+.svc-row .svc-input { flex: 1 1 0; min-width: 0; }
+.svc-row .svc-input:first-child { flex: 2 1 0; }
+
+@include mobile {
+  .svc-row,
+  .mat-row,
+  .room-add {
+    flex-direction: column;
+  }
+  .svc-headers {
+    display: none;
+  }
+  .svc-row .svc-input {
+    width: 100%;
+    flex: none;
+  }
+}

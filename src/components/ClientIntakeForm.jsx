@@ -155,17 +155,19 @@ function ServiceRow({ service, onChange, onRemove }) {
         marginBottom: 10,
       }}
     >
-      <div style={{ display: "flex", gap: 10, padding: "14px 16px", alignItems: "center" }}>
+      <div className="svc-row" style={{ display: "flex", gap: 10, padding: "14px 16px", alignItems: "center" }}>
         <input
+          className="svc-input"
           value={service.name}
           onChange={(e) => onChange({ ...service, name: e.target.value })}
           placeholder="Service name…"
-          style={inputStyle({ flex: 2 })}
+          style={inputStyle()}
         />
         <select
+          className="svc-input"
           value={service.unit}
           onChange={(e) => onChange({ ...service, unit: e.target.value })}
-          style={inputStyle({ flex: 1, cursor: "pointer" })}
+          style={inputStyle({ cursor: "pointer" })}
         >
           <option value="">Unit…</option>
           {SERVICE_UNIT_OPTIONS.map((u) => (
@@ -173,12 +175,13 @@ function ServiceRow({ service, onChange, onRemove }) {
           ))}
         </select>
         <input
+          className="svc-input"
           value={service.unit_price}
           onChange={(e) => onChange({ ...service, unit_price: e.target.value })}
           placeholder="Price / unit"
           type="number"
           min="0"
-          style={inputStyle({ width: 110 })}
+          style={inputStyle()}
         />
         <button
           onClick={() => setMatOpen(!matOpen)}
@@ -234,7 +237,7 @@ function ServiceRow({ service, onChange, onRemove }) {
             MATERIALS FOR {service.name.toUpperCase() || "THIS SERVICE"}
           </div>
           {service.materials.map((mat, mi) => (
-            <div key={mi} style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center" }}>
+            <div key={mi} className="mat-row" style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "center" }}>
               <input
                 value={mat.name}
                 onChange={(e) => updateMat(mi, "name", e.target.value)}
@@ -397,7 +400,7 @@ export default function ClientIntakeForm() {
             CLIENT SETUP
           </div>
           <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 48, fontWeight: 600, color: "#ffffff", margin: 0, lineHeight: 1.05 }}>
-            Hi Paweł, Tell us about<br /><em style={{ fontWeight: 400 }}>your work.</em>
+            Hi Paweł, Tell us about <em style={{ fontWeight: 400 }}>your work.</em>
           </h1>
           <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#555", marginTop: 16, lineHeight: 1.8, maxWidth: 480 }}>
             Three questions. 10 minutes. Save 30 minutes per Angebot forever.
@@ -445,7 +448,7 @@ export default function ClientIntakeForm() {
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#444", letterSpacing: "0.1em", marginBottom: 8 }}>
               ADD CUSTOM TYPE
             </div>
-            <div style={{ display: "flex", gap: 8 }}>
+            <div className="room-add" style={{ display: "flex", gap: 8 }}>
               <input
                 value={customRoom}
                 onChange={(e) => setCustomRoom(e.target.value)}
@@ -501,7 +504,7 @@ export default function ClientIntakeForm() {
             onToggle={() => toggleSection(2)}
             complete={servicesComplete}
           >
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#444", letterSpacing: "0.1em", marginBottom: 14, display: "grid", gridTemplateColumns: "2fr 1fr 110px auto auto", gap: 10, paddingRight: 6 }}>
+            <div className="svc-headers" style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#444", letterSpacing: "0.1em", marginBottom: 14, display: "grid", gridTemplateColumns: "2fr 1fr 110px auto auto", gap: 10, paddingRight: 6 }}>
               <span>SERVICE</span>
               <span>UNIT</span>
               <span>PRICE / UNIT (€)</span>
