@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^5.0.3",
+    "@supabase/supabase-js": "^2.105.3",
     "astro": "^5.18.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"

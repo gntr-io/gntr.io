@@ -40,5 +40,7 @@ next-env.d.ts
 /dist/
 /.astro/
 
+CLAUDE.md
+dev.vars
 .docs/
 .vscode/
