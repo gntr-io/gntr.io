@@ -52,13 +52,16 @@ const services = [
             <span class="command">gntr build --type=ai-system</span>
           </p>
           <p class="terminal-output">
-            Building AI systems for people who know their domain.
+            Custom AI tools that save your team noticeable hours every week.
           </p>
           <h1 class="hero-title">
             Your expertise. <span class="highlight">Engineered.</span>
           </h1>
           <p class="hero-description">
-            We build custom AI systems that encode what you know and scale what you do — for your team, or as a product you can sell.
+            We build AI tools tailored to how your team actually works — not adapted from a template, built from scratch around your specific process.
+          </p>
+          <p class="hero-example">
+            The ops team copying data between two systems every morning. The consultant rewriting the same report every Friday. That's the work we automate.
           </p>
           <div class="hero-actions">
             <a href="/contact" class="btn btn-primary" id="hero-get-started">Start with a conversation</a>
@@ -87,6 +90,32 @@ const services = [
             </div>
           ))
         }
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work Section -->
+  <section class="how-we-work">
+    <div class="container">
+      <h2 class="section-title">
+        <span class="prompt">›</span> How we work
+      </h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3 class="step-title">We start inside your business</h3>
+          <p class="step-description">We spend 2–4 weeks learning how you actually work — your processes, your edge cases, the decisions you make by instinct. We don't start with a template. We start with you.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3 class="step-title">We build for your workflow</h3>
+          <p class="step-description">Every system is built around your specific process — not a generic tool adapted to fit. The result handles your repeatable work automatically, so your team focuses on what actually needs a human.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3 class="step-title">Your system keeps improving</h3>
+          <p class="step-description">After launch, your system watches your data and surfaces what's changing. We tell you what we're seeing and what we can do about it. You decide when to upgrade. Most software does the same thing on day 100 that it did on day one. Yours doesn't have to.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -227,6 +256,16 @@ const services = [
     max-width: 600px;
   }
 
+  .hero-example {
+    font-size: 0.95rem;
+    color: rgba($text-body, 0.7);
+    font-style: italic;
+    margin-bottom: 2rem;
+    max-width: 560px;
+    border-left: 2px solid rgba($cta-primary, 0.4);
+    padding-left: 1rem;
+  }
+
   .hero-actions {
     display: flex;
     gap: 1rem;
@@ -303,6 +342,59 @@ const services = [
   .card-description {
     color: $text-body;
     line-height: 1.6;
+  }
+
+  .how-we-work {
+    margin-bottom: 4rem;
+
+    @include tablet {
+      margin-bottom: 6rem;
+    }
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include tablet {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step {
+    background-color: $bg-card;
+    border: 1px solid rgba($cta-primary, 0.2);
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+
+    &:hover {
+      border-color: $cta-primary;
+    }
+  }
+
+  .step-number {
+    font-family: "Courier New", monospace;
+    font-size: 0.75rem;
+    color: $cta-primary;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .step-title {
+    font-size: 1.125rem;
+    color: $text-heading;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .step-description {
+    color: $text-body;
+    line-height: 1.7;
+    font-size: 0.95rem;
   }
 
   .contact {
